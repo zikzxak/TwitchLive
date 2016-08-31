@@ -41,7 +41,7 @@ module.exports = (slapp) => {
 
     msg.say('Fetching companies...')
     var companies = 'New companies registered yesterday:' + '\n'
-    axios.get('http://avoindata.prh.fi:80/tr/v1?totalResults=true&maxResults=200&resultsFrom=0&companyForm=OY&companyRegistrationFrom='+today+'companyRegistrationTo='+today)
+    axios.get('http://avoindata.prh.fi:80/tr/v1?totalResults=true&maxResults=200&resultsFrom=0&companyForm=OY&companyRegistrationFrom='+today+'&companyRegistrationTo='+today)
       .then(function (response) {
           response.data.results.forEach(function(company) {
             companies = companies.concat(company.name + '\n')
