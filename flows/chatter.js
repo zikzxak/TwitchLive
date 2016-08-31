@@ -23,7 +23,17 @@ module.exports = (slapp) => {
   })
 
   slapp.message('prh', ['direct_mention', 'direct_message'], (msg, text) => {
-    msg.say('which one?')
+    var companies = 'New companies registered yesterday:' + '\n';
+    axios.get('http://avoindata.prh.fi:80/tr/v1?totalResults=true&maxResults=200&resultsFrom=0&companyForm=OY&companyRegistrationFrom=2016-08-29&companyRegistrationTo=2016-08-29')
+      .then(function (response) {
+          response.data.results.forEach(function(company) {
+            companies = companies.concat(company.name + '\n')
+          })
+        msg.say(companies);
+      })
+      .catch(function (error) {
+        console.log(error)
+      });
   })
 
   slapp.message('^(thanks|thank you)', ['mention', 'direct_message'], (msg) => {
