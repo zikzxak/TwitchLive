@@ -24,11 +24,13 @@ module.exports = (slapp) => {
   })
 
   slapp.message('prh', ['direct_mention', 'direct_message'], (msg) => {
+    
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth()+1; //January is 0!
     var yyyy = today.getFullYear();
     today = yyyy+'-'+mm+'-'+dd;
+
     msg.say('Fetching companies...')
     var companies = 'New companies registered yesterday:' + '\n'
     axios.get(`http://avoindata.prh.fi:80/tr/v1?totalResults=true&maxResults=200&resultsFrom=0&companyForm=OY&companyRegistrationFrom=${today}&companyRegistrationTo=${today}`)
