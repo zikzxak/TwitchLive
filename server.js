@@ -15,10 +15,6 @@ require('beepboop-slapp-presence-polyfill')(slapp, { debug: true })
 require('./flows')(slapp)
 var app = slapp.attachToExpress(express())
 
-slapp.message('prh', ['direct_mention', 'direct_message'], (msg, text) => {
-  msg.say('which one?')
-})
-
 app.get('/', function (req, res) {
   res.send('Hello')
 })

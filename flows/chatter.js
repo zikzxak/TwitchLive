@@ -22,6 +22,10 @@ module.exports = (slapp) => {
     }
   })
 
+  slapp.message('prh', ['direct_mention', 'direct_message'], (msg, text) => {
+    msg.say('which one?')
+  })
+
   slapp.message('^(thanks|thank you)', ['mention', 'direct_message'], (msg) => {
     msg.say(['You are welcome', 'Of course'])
   })
