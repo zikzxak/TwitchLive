@@ -21,13 +21,18 @@ slapp.message('streamers', (msg) => {
 		console.log('getting streams...')
 		axios.get(twitchGet)
 			.then(function (response) {
-				msg.say('no streams!')
+				msg.say(response.data)
 				console.log('found streams')
 			})
 			.catch(function (error) {
 				console.log(error);
 			})
 	}, 3000)
+})
+
+slapp.command('/add', /.*/, (msg, text) => {
+	var streamers = streamers.concat(','+{msg.body.text})
+   	msg.respond('Awesome! Now Im watching '+{msg.body.text}+)
 })
 
 require('beepboop-slapp-presence-polyfill')(slapp, { debug: true })
