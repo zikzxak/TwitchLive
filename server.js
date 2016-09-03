@@ -17,27 +17,30 @@ var twitch = new TwitchApi({})
 
 var streamers = []
 
-slapp.message('start', (msg) => {
+slapp.message('start', 'mention', (msg) => {
 	console.log('getting streams')
-	if(streamers.length > 0) {
-		streamers.forEach(function(streamer, index) {
-			twitch.getChannelStream(streamer.name, function(err, body) {
-				if (err) {
-					console.log(err);
-				} else if (body.stream) {
-					if (streamers[index].streaming == false) {
-						msg.say(body.stream.channel.display_name + ' is playing ' + body.stream.game + '.' + ' Stream: ' + body.stream.channel.url);
-						streamers[index].streaming = true
+	function getStreams() {
+		if(streamers.length > 0) {
+			streamers.forEach(function(streamer, index) {
+				twitch.getChannelStream(streamer.name, function(err, body) {
+					if (err) {
+						console.log(err);
+					} else if (body.stream) {
+						if (streamers[index].streaming == false) {
+							msg.say(body.stream.channel.display_name + ' is playing ' + body.stream.game + '.' + ' Stream: ' + body.stream.channel.url);
+							streamers[index].streaming = true
+						}
+					} else if (streamers[index].streaming == true ) {
+						streamers[index].streaming = false
 					}
-				} else if (streamers[index].streaming == true ) {
-					streamers[index].streaming = false
-				}
+				});
 			});
-		});
-	} else {
-		console.log('no streamers!')
+		} else {
+			console.log('no streamers!')
+		}
+		setTimeout(getStreams, 30000);
 	}
-}, 50000);
+});
 
 slapp.command('/add', /.*/, (msg, text) => {
 	var streamer = {name: text.trim().toLowerCase(), streaming: false}
