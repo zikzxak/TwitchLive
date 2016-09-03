@@ -21,7 +21,7 @@ slapp.message('streamers', (msg) => {
 	console.log('getting streams')
 	if(streamers.length > 0) {
 		streamers.forEach(function(streamer, index) {
-			twitch.getChannelStream(streamer, function(err, body) {
+			twitch.getChannelStream(streamer.name, function(err, body) {
 				if (err) {
 					console.log(err);
 				} else if (body.stream) {
