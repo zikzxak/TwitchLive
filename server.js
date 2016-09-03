@@ -75,7 +75,7 @@ slapp.command('/delete', /.*/, (msg, text) => {
 			}
 		});
 	} else {
-		msg.say('w00t I couldnt find ' + streamer + ' !??'
+		msg.say('w00t I couldnt find ' + streamer + ' !??')
 	}
    	console.log(streamers);
 })
