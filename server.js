@@ -18,7 +18,7 @@ var twitch = new TwitchApi({})
 var streamers = []
 
 slapp.message('streamers', (msg) => {
-	console.log('getting streams for ' + streamers)
+	console.log('getting streams')
 	streamers.forEach(function(streamer) {
 		twitch.getChannelStream(streamer, function(err, body) {
 			if (err) {
@@ -27,22 +27,8 @@ slapp.message('streamers', (msg) => {
 				msg.say(body.stream.name + 'is playing ' + body.stream.game + '.' + 'Stream: ' + body.stream.url);
 			}
 		});
-	})
-	
-/**	axios.get('https://api.twitch.tv/kraken/streams?channel=' + streamers)
-		.then(function (response) {
-			if(response.data.streams[0]) {
-				console.log('found streams');
-				console.log(response.data);
-				msg.say(response.data.streams[0].name)
-			} else {
-				console.log('no streamers')
-			}
-		})
-		.catch(function (error) {
-			console.log(error);
-		}) **/
-})
+	});
+});
 
 slapp.command('/add', /.*/, (msg, text) => {
 	streamers.push(text)
