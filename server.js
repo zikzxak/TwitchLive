@@ -19,15 +19,19 @@ var streamers = []
 
 slapp.message('streamers', (msg) => {
 	console.log('getting streams')
-	streamers.forEach(function(streamer) {
-		twitch.getChannelStream(streamer, function(err, body) {
-			if (err) {
-				console.log(err);
-			} else {
-				msg.say(body.stream.name + 'is playing ' + body.stream.game + '.' + 'Stream: ' + body.stream.url);
-			}
+	if(streamers.length > 0) {}
+		streamers.forEach(function(streamer) {
+			twitch.getChannelStream(streamer, function(err, body) {
+				if (err) {
+					console.log(err);
+				} else {
+					msg.say(body.stream.channel.display_name + 'is playing ' + body.stream.game + '.' + 'Stream: ' + body.stream.channel.url);
+				}
+			});
 		});
-	});
+	} else {
+		msg.say('no streamers!')
+	}
 });
 
 slapp.command('/add', /.*/, (msg, text) => {
