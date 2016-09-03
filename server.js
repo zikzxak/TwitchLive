@@ -20,14 +20,17 @@ var streamers = []
 slapp.message('streamers', (msg) => {
 	console.log('getting streams')
 	if(streamers.length > 0) {
-		streamers.forEach(function(streamer) {
+		streamers.forEach(function(streamer, index) {
 			twitch.getChannelStream(streamer, function(err, body) {
 				if (err) {
 					console.log(err);
-				} if (body.stream) {
-					msg.say(body.stream.channel.display_name + 'is playing ' + body.stream.game + '.' + 'Stream: ' + body.stream.channel.url);
-				} else {
-					msg.say('Im sorry theres no active streamers. Maybe you should stream your own? ;)')
+				} else if (body.stream) {
+					if (streamers[index].streaming == false) {
+						msg.say(body.stream.channel.display_name + 'is playing ' + body.stream.game + '.' + 'Stream: ' + body.stream.channel.url);
+						streamers[index].streaming = true
+					}
+				} else if (streamers[index].streaming == true ) {
+					streamers[index].streaming = false
 				}
 			});
 		});
@@ -37,7 +40,8 @@ slapp.message('streamers', (msg) => {
 });
 
 slapp.command('/add', /.*/, (msg, text) => {
-	streamers.push(text)
+	var streamer = {name: text, streaming: false}
+	streamers.push(streamer)
    	msg.respond('Awesome! Now Im watching ' + text)
    	console.log(streamers);
 })
