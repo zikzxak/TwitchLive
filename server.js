@@ -12,6 +12,20 @@ var slapp = Slapp({
   context: BeepBoopContext()
 })
 
+var streamers = 'tissukka'
+
+var twitchGet = 'https://api.twitch.tv/kraken/streams?channel='+streamers
+
+setInterval(function () {
+	axios.get(twitchGet)
+		.then(function (response) {
+			msg.say(response.data);
+		})
+		.catch(function (error) {
+			console.log(error);
+		})
+}, 300)
+
 require('beepboop-slapp-presence-polyfill')(slapp, { debug: true })
 require('./flows')(slapp)
 var app = slapp.attachToExpress(express())
