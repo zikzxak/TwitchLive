@@ -43,17 +43,18 @@ slapp.command('/add', /.*/, (msg, text) => {
 	var streamer = {name: text.trim().toLowerCase(), streaming: false}
 	console.log(streamer);
 	if(streamers.length > 0) {
-		streamers.forEach(function(name) {
+		streamers.forEach(function(name, index) {
 			if (name.name == text) {
 				msg.say('Im already watching' + text + '!')
-			} else {
+				break;
+			} else if (index == streamers.length - 1) {
 				streamers.push(streamer)
 				console.log('added streamer: ' + streamer.name);
 			}
 		});
 	} else {
-		streamers.push(streamer.name)
-		console.log('added streamer: ' + streamer);
+		streamers.push(streamer)
+		console.log('added streamer: ' + streamer.name);
 	}
    	msg.respond('Awesome! Now Im watching ' + text)
    	console.log(streamers);
