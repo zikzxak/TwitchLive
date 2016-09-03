@@ -17,7 +17,7 @@ var twitch = new TwitchApi({})
 
 var streamers = []
 
-slapp.commad('/start', (msg) => {
+slapp.message('start', (msg) => {
 	console.log('getting streams')
 	if(streamers.length > 0) {
 		streamers.forEach(function(streamer, index) {
@@ -35,7 +35,7 @@ slapp.commad('/start', (msg) => {
 			});
 		});
 	} else {
-		msg.say('no streamers!')
+		console.log('no streamers!')
 	}
 }, 50000);
 
