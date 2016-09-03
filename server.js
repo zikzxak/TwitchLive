@@ -17,8 +17,10 @@ var streamers = 'tissukka'
 var twitchGet = 'https://api.twitch.tv/kraken/streams?channel='+streamers
 
 setInterval(function () {
+	console.log('getting streams...')
 	axios.get(twitchGet)
 		.then(function (response) {
+			console.log('found streams')
 			msg.say(response.data);
 		})
 		.catch(function (error) {
