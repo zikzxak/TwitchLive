@@ -20,8 +20,10 @@ setInterval(function () {
 	console.log('getting streams...')
 	axios.get(twitchGet)
 		.then(function (response) {
+			slapp.message((response) => {
+			    msg.say(response.data)
+			  })
 			console.log('found streams')
-			msg.say(response.data);
 		})
 		.catch(function (error) {
 			console.log(error);
