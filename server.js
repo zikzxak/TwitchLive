@@ -24,8 +24,10 @@ slapp.message('streamers', (msg) => {
 			twitch.getChannelStream(streamer, function(err, body) {
 				if (err) {
 					console.log(err);
-				} else {
+				} if else (body.stream) {
 					msg.say(body.stream.channel.display_name + 'is playing ' + body.stream.game + '.' + 'Stream: ' + body.stream.channel.url);
+				} else {
+					msg.say('Im sorry theres no active streamers. Maybe you should stream your own? ;)')
 				}
 			});
 		});
