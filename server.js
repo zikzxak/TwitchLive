@@ -14,11 +14,9 @@ var slapp = Slapp({
 
 var streamers = 'tissukka'
 
-var twitchGet = 'https://api.twitch.tv/kraken/streams?channel='+streamers
-
 slapp.message('streamers', (msg) => {
-	console.log('getting streams...')
-	axios.get(twitchGet)
+	console.log('getting streams for ' + streamers)
+	axios.get('https://api.twitch.tv/kraken/streams?channel=' + streamers)
 		.then(function (response) {
 			if(response.data.streams[0]) {
 				console.log('found streams');
