@@ -19,13 +19,16 @@ var streamers = []
 
 slapp.message('streamers', (msg) => {
 	console.log('getting streams for ' + streamers)
-	twitch.getChannelStream('ESL_CSGO', function(err, body) {
-		if (err) {
-			console.log(err);
-		} else {
-			console.log(body.stream.game);
-		}
-	});
+	streamers.forEach(function(streamer) {
+		twitch.getChannelStream(streamer, function(err, body) {
+			if (err) {
+				console.log(err);
+			} else {
+				msg.say(body.stream.name + 'is playing ' + body.stream.game + '.' + 'Stream: ' + body.stream.url);
+			}
+		});
+	})
+	
 /**	axios.get('https://api.twitch.tv/kraken/streams?channel=' + streamers)
 		.then(function (response) {
 			if(response.data.streams[0]) {
@@ -42,7 +45,7 @@ slapp.message('streamers', (msg) => {
 })
 
 slapp.command('/add', /.*/, (msg, text) => {
-	streamers = streamers.concat(','+ text);
+	streamers.push(text)
    	msg.respond('Awesome! Now Im watching ' + text)
    	console.log(streamers);
 })
