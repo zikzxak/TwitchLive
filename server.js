@@ -17,21 +17,19 @@ var streamers = 'tissukka'
 var twitchGet = 'https://api.twitch.tv/kraken/streams?channel='+streamers
 
 slapp.message('streamers', (msg) => {
-	setInterval(function () {
-		console.log('getting streams...')
-		axios.get(twitchGet)
-			.then(function (response) {
-				if(response.data.streams.length > 0) {
-					msg.say(response.data.streams[0].name)
-				} else {
-					console.log('no streamers')
-				}
-				console.log(response);
-			})
-			.catch(function (error) {
-				console.log(error);
-			})
-	}, 30000)
+	console.log('getting streams...')
+	axios.get(twitchGet)
+		.then(function (response) {
+			if(response.data.streams.length > 0) {
+				console.log(response.data);
+				msg.say(response.data.streams[0].name)
+			} else {
+				console.log('no streamers')
+			}
+		})
+		.catch(function (error) {
+			console.log(error);
+		})
 })
 
 slapp.command('/add', /.*/, (msg, text) => {
