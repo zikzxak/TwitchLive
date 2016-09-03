@@ -44,15 +44,15 @@ slapp.command('/add', /.*/, (msg, text) => {
 	console.log(streamer);
 	if(streamers.length > 0) {
 		streamers.forEach(function(name) {
-			if (name == text) {
+			if (name.name == text) {
 				msg.say('Im already watching' + text + '!')
 			} else {
 				streamers.push(streamer)
-				console.log('added streamer: ' + streamer);
+				console.log('added streamer: ' + streamer.name);
 			}
 		});
 	} else {
-		streamers.push(streamer)
+		streamers.push(streamer.name)
 		console.log('added streamer: ' + streamer);
 	}
    	msg.respond('Awesome! Now Im watching ' + text)
