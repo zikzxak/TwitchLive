@@ -19,7 +19,7 @@ var streamers = 'tissukka'
 
 slapp.message('streamers', (msg) => {
 	console.log('getting streams for ' + streamers)
-	twitch.getChannelStream('tissukka', function(err, body) {
+	twitch.getChannelStream('ESL_CSGO', function(err, body) {
 		if (err) {
 			console.log(err);
 		} else {
