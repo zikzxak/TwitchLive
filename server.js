@@ -71,7 +71,7 @@ slapp.command('/delete', /.*/, (msg, text) => {
 				streamers.splice(index, 1);
 				return;
 			} else if (index == streamers.length - 1) {
-				msg.respond('w00t I couldnt find ' + streamer ' !??')
+				msg.say('w00t I couldnt find ' + streamer + ' !??')
 			}
 		});
 	} else {
