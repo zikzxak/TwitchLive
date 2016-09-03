@@ -27,7 +27,7 @@ slapp.message('streamers', (msg) => {
 			.catch(function (error) {
 				console.log(error);
 			})
-	}, 300)
+	}, 3000)
 })
 
 require('beepboop-slapp-presence-polyfill')(slapp, { debug: true })
