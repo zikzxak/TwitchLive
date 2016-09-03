@@ -15,7 +15,7 @@ var slapp = Slapp({
 
 var twitch = new TwitchApi({})
 
-var streamers = 'tissukka'
+var streamers = []
 
 slapp.message('streamers', (msg) => {
 	console.log('getting streams for ' + streamers)
@@ -23,7 +23,7 @@ slapp.message('streamers', (msg) => {
 		if (err) {
 			console.log(err);
 		} else {
-			console.log(body.stream.display_name);
+			console.log(body.stream);
 		}
 	});
 /**	axios.get('https://api.twitch.tv/kraken/streams?channel=' + streamers)
