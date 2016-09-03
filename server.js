@@ -37,6 +37,7 @@ slapp.message('streamers', (msg) => {
 slapp.command('/add', /.*/, (msg, text) => {
 	streamers = streamers.concat(',ESL_GO');
    	msg.respond('Awesome! Now Im watching ESL_GO')
+   	console.log(text);
    	console.log(streamers);
 })
 
