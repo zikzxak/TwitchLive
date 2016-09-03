@@ -4,6 +4,7 @@ const Slapp = require('slapp')
 const BeepBoopConvoStore = require('slapp-convo-beepboop')
 const BeepBoopContext = require('slapp-context-beepboop')
 const axios = require('axios')
+const TwitchApi = require('twitch-api')
 if (!process.env.PORT) throw Error('PORT missing but required')
 
 var slapp = Slapp({
@@ -12,11 +13,20 @@ var slapp = Slapp({
   context: BeepBoopContext()
 })
 
+var twitch = new TwitchApi({})
+
 var streamers = 'tissukka'
 
 slapp.message('streamers', (msg) => {
 	console.log('getting streams for ' + streamers)
-	axios.get('https://api.twitch.tv/kraken/streams?channel=' + streamers)
+	twitch,getChannelStream('tissukka', function(err, body) {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log(body);
+		}
+	});
+/**	axios.get('https://api.twitch.tv/kraken/streams?channel=' + streamers)
 		.then(function (response) {
 			if(response.data.streams[0]) {
 				console.log('found streams');
@@ -28,7 +38,7 @@ slapp.message('streamers', (msg) => {
 		})
 		.catch(function (error) {
 			console.log(error);
-		})
+		}) **/
 })
 
 slapp.command('/add', /.*/, (msg, text) => {

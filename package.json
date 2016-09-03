@@ -14,6 +14,7 @@
     "express": "^4.14.0",
     "slapp": "^1.0.4",
     "slapp-context-beepboop": "^1.0.0",
-    "slapp-convo-beepboop": "^1.0.0"
+    "slapp-convo-beepboop": "^1.0.0",
+    "twitch-api":"latest"
   }
 }
