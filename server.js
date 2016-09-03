@@ -17,7 +17,7 @@ var twitch = new TwitchApi({})
 
 var streamers = []
 
-slapp.message('streamers', (msg) => {
+setInterval(function() {
 	console.log('getting streams')
 	if(streamers.length > 0) {
 		streamers.forEach(function(streamer, index) {
@@ -37,7 +37,7 @@ slapp.message('streamers', (msg) => {
 	} else {
 		msg.say('no streamers!')
 	}
-});
+}, 30000);
 
 slapp.command('/add', /.*/, (msg, text) => {
 	var streamer = {name: text.trim().toLowerCase(), streaming: false}
@@ -87,12 +87,10 @@ slapp.command('/list', (msg) => {
 				if (err) {
 					console.log(err);
 				} else if (body.stream) {
-					if (streamers[index].streaming == false) {
-						msg.say(body.stream.channel.display_name + ' is offline');
-					} else if (streamers[index].streaming == true) {
-						msg.say(body.stream.channel.display_name + ' is playing ' + body.stream.game + '.' + ' Stream: ' + body.stream.channel.url);
-					}
-				} 
+					msg.say(body.stream.channel.display_name + ' is playing ' + body.stream.game + '.' + ' Stream: ' + body.stream.channel.url);
+				} else {
+					msg.say(body.stream.channel.display_name + ' is offline');
+				}
 			});
 		});
 	} else {
