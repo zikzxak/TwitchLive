@@ -20,7 +20,7 @@ slapp.message('streamers', (msg) => {
 	console.log('getting streams...')
 	axios.get(twitchGet)
 		.then(function (response) {
-			if(response.data.streams.length > 0) {
+			if(response.data.streams[0]) {
 				console.log('found streams');
 				console.log(response.data);
 				msg.say(response.data.streams[0].name)
