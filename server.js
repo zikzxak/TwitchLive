@@ -23,7 +23,7 @@ slapp.message('streamers', (msg) => {
 		if (err) {
 			console.log(err);
 		} else {
-			console.log(body.stream);
+			console.log(body.stream.display_name);
 		}
 	});
 /**	axios.get('https://api.twitch.tv/kraken/streams?channel=' + streamers)
