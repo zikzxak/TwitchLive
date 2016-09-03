@@ -26,7 +26,7 @@ slapp.message('streamers', (msg) => {
 					console.log(err);
 				} else if (body.stream) {
 					if (streamers[index].streaming == false) {
-						msg.say(body.stream.channel.display_name + 'is playing ' + body.stream.game + '.' + 'Stream: ' + body.stream.channel.url);
+						msg.say(body.stream.channel.display_name + ' is playing ' + body.stream.game + '.' + ' Stream: ' + body.stream.channel.url);
 						streamers[index].streaming = true
 					}
 				} else if (streamers[index].streaming == true ) {
@@ -60,6 +60,45 @@ slapp.command('/add', /.*/, (msg, text) => {
 	}
    	console.log(streamers);
 })
+
+slapp.command('/delete', /.*/, (msg, text) => {
+	var streamer = text.trim().toLowerCase()
+	console.log(streamer);
+	if(streamers.length > 0) {
+		streamers.forEach(function(name, index) {
+			if (name.name == streamer) {
+				msg.say('Sad to see ' + streamer + ' go :(')
+				streamers.splice(index, 1);
+				return;
+			} else if (index == streamers.length - 1) {
+				msg.respond('w00t I couldnt find ' + streamer ' !??')
+			}
+		});
+	} else {
+		msg.respond('w00t I couldnt find ' + streamer ' !??'
+	}
+   	console.log(streamers);
+})
+
+slapp.command('/list', (msg) => {
+	if(streamers.length > 0) {
+		streamers.forEach(function(name, index) {
+			twitch.getChannelStream(name.name, function(err, body) {
+				if (err) {
+					console.log(err);
+				} else if (body.stream) {
+					if (streamers[index].streaming == false) {
+						msg.say(body.stream.channel.display_name + ' is offline');
+					} else if (streamers[index].streaming == true) {
+						msg.say(body.stream.channel.display_name + ' is playing ' + body.stream.game + '.' + ' Stream: ' + body.stream.channel.url);
+					}
+				} 
+			});
+		});
+	} else {
+		msg.respond('no streamers on my watch!')
+	}
+})		
 
 require('beepboop-slapp-presence-polyfill')(slapp, { debug: true })
 require('./flows')(slapp)
