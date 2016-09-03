@@ -24,7 +24,7 @@ slapp.message('streamers', (msg) => {
 				if(response.data.streams.length > 0) {
 					msg.say(response.data.streams[0].name)
 				} else {
-					msg.say('no streamers :((')
+					console.log('no streamers')
 				}
 				console.log(response);
 			})
@@ -35,9 +35,8 @@ slapp.message('streamers', (msg) => {
 })
 
 slapp.command('/add', /.*/, (msg, text) => {
-	streamers = streamers.concat(',ESL_GO');
-   	msg.respond('Awesome! Now Im watching ESL_GO')
-   	console.log(text);
+	streamers = streamers.concat(','+ text);
+   	msg.respond('Awesome! Now Im watching ' + text)
    	console.log(streamers);
 })
 
