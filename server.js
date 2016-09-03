@@ -17,7 +17,7 @@ var twitch = new TwitchApi({})
 
 var streamers = []
 
-setInterval(function() {
+slapp.commad('/start', (msg) => {
 	console.log('getting streams')
 	if(streamers.length > 0) {
 		streamers.forEach(function(streamer, index) {
@@ -37,7 +37,7 @@ setInterval(function() {
 	} else {
 		msg.say('no streamers!')
 	}
-}, 30000);
+}, 50000);
 
 slapp.command('/add', /.*/, (msg, text) => {
 	var streamer = {name: text.trim().toLowerCase(), streaming: false}
