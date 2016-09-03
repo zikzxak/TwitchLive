@@ -41,13 +41,15 @@ slapp.message('streamers', (msg) => {
 
 slapp.command('/add', /.*/, (msg, text) => {
 	var streamer = {name: text.trim().toLowerCase(), streaming: false}
-	streamers.forEach(function(name) {
-		if (name == text) {
-			msg.say('Im already watching' + text + '!')
-		} else {
-			streamers.push(streamer)
-		}
-	});
+	if(streamers.length > 0) {
+		streamers.forEach(function(name) {
+			if (name == text) {
+				msg.say('Im already watching' + text + '!')
+			} else {
+				streamers.push(streamer)
+			}
+		});
+	}
    	msg.respond('Awesome! Now Im watching ' + text)
    	console.log(streamers);
 })
