@@ -16,19 +16,19 @@ var streamers = 'tissukka'
 
 var twitchGet = 'https://api.twitch.tv/kraken/streams?channel='+streamers
 
-setInterval(function () {
-	console.log('getting streams...')
-	axios.get(twitchGet)
-		.then(function (response) {
-			slapp.message((response) => {
-			    msg.say(response.data)
-			  })
-			console.log('found streams')
-		})
-		.catch(function (error) {
-			console.log(error);
-		})
-}, 300)
+slapp.message('streamers', (msg) => {
+	setInterval(function () {
+		console.log('getting streams...')
+		axios.get(twitchGet)
+			.then(function (response) {
+				msg.say(response.data)
+				console.log('found streams')
+			})
+			.catch(function (error) {
+				console.log(error);
+			})
+	}, 300)
+})
 
 require('beepboop-slapp-presence-polyfill')(slapp, { debug: true })
 require('./flows')(slapp)
