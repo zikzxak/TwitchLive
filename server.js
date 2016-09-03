@@ -17,7 +17,8 @@ var twitch = new TwitchApi({})
 
 var streamers = []
 
-slapp.message('start', 'mention', (msg) => {
+slapp.message('monitor', 'mention', (msg) => {
+	msg.say('Im on it!')
 	console.log('getting streams')
 	function getStreams() {
 		if(streamers.length > 0) {
