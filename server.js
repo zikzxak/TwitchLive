@@ -49,7 +49,7 @@ slapp.command('/monitor', /^\s*start\s*$/, (msg) => {
 						            color: "#36a64f",
 						            author_name: body.stream.channel.status,
 						            author_link: body.stream.channel.url,
-						            title: "Repomies is streaming!",
+						            title: body.stream.channel.display_name + ' is streaming!',
 						            title_link: body.stream.channel.url,
 						            text: 'Game: ' + body.stream.game,
 									thumb_url: body.stream.preview.small
