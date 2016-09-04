@@ -56,7 +56,7 @@ slapp.command('/monitor', /^\s*start\s*$/, (msg) => {
 
 slapp.command('/monitor', /^\s*stop\s*$/, (msg) => {
 	monitoring = false;
-}
+});
 
 slapp.command('/add', /.*/, (msg, text) => {
 	var streamer = {name: text.trim().toLowerCase(), streaming: false}
