@@ -17,7 +17,7 @@ var twitch = new TwitchApi({})
 
 var streamers = []
 
-slapp.message('monitor', 'mention', (msg) => {
+slapp.message('monitor', ['direct_mention', 'direct_message'], (msg) => {
 	msg.say('Im on it!')
 	console.log('getting streams')
 	function getStreams() {
@@ -41,6 +41,8 @@ slapp.message('monitor', 'mention', (msg) => {
 		}
 		setTimeout(getStreams, 30000);
 	}
+
+	getStreams();
 });
 
 slapp.command('/add', /.*/, (msg, text) => {
