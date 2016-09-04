@@ -61,6 +61,8 @@ slapp.command('/monitor', /^\s*stop\s*$/, (msg) => {
     }
  
     clearTimeout(monitoringTimeout);
+    monitoringTimeout = null;
+    msg.say('Im no longer monitoring streams :sob:')
 });
  
 slapp.command('/add', /.*/, (msg, text) => {
