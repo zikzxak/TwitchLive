@@ -17,10 +17,14 @@ var twitch = new TwitchApi({})
 
 var streamers = []
 
-slapp.message('monitor', ['direct_mention', 'direct_message'], (msg) => {
-	msg.say('Im on it!')
+var monitoring = false
+
+slapp.command('/monitor', /^\s*start\s*$/, (msg) => {
+	monitoring = true;
+	msg.say('Started monitoring streams!')
 	console.log('getting streams')
 	function getStreams() {
+		console.log('monitoring...');
 		if(streamers.length > 0) {
 			streamers.forEach(function(streamer, index) {
 				twitch.getChannelStream(streamer.name, function(err, body) {
@@ -39,11 +43,20 @@ slapp.message('monitor', ['direct_mention', 'direct_message'], (msg) => {
 		} else {
 			console.log('no streamers!')
 		}
-		setTimeout(getStreams, 30000);
+		if (monitoring = true) {
+			setTimeout(getStreams, 30000);
+		} else {
+			return;
+		}
+		
 	}
 
 	getStreams();
 });
+
+slapp.command('/monitor', /^\s*stop\s*$/, (msg) => {
+	monitoring = false;
+}
 
 slapp.command('/add', /.*/, (msg, text) => {
 	var streamer = {name: text.trim().toLowerCase(), streaming: false}
@@ -95,7 +108,7 @@ slapp.command('/list', (msg) => {
 				} else if (body.stream) {
 					msg.say(body.stream.channel.display_name + ' is playing ' + body.stream.game + '.' + ' Stream: ' + body.stream.channel.url);
 				} else {
-					msg.say(body.stream.channel.display_name + ' is offline');
+					msg.say(name.name + ' is offline');
 				}
 			});
 		});
