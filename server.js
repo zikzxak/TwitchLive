@@ -102,20 +102,23 @@ slapp.command('/add', /.*/, (msg, text) => {
 })
  
 slapp.command('/delete', /.*/, (msg, text) => {
-	var newStreamer = {name: text.trim().toLowerCase(), streaming: false}
-    console.log(newStreamer);
+    const streamerName = text.trim().toLowerCase();
+    console.log(streamerName);
  
     //find function to search array
     function findStreamer(streamer) {
-        return streamer.name === newStreamer.name;
+        return streamer.name === streamerName;
     }
  
+    //Get index of the streamer we are deleting
+    const streamerIndex = streamers.findIndex(findStreamer);
+ 
     //If streamer is in array delete, else error.
-    if(streamers.findIndex(findStreamer)){
-        msg.say('Im no longer looking after ' + newStreamer.name + ' :sob:')
-        streamers.splice(streamers.findIndex(findStreamer), 1);
+    if(streamerIndex !== -1){
+        msg.say('Im no longer looking after ' + streamerName + ' :sob:')
+        streamers.splice(streamerIndex, 1);
     } else {
-        msg.respond('w00t I couldnt find ' + newStreamer.name + ' !??')
+        msg.respond('w00t I couldnt find ' + streamerName + ' !??');
     }
  
     console.log(streamers);
