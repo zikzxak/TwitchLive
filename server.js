@@ -24,7 +24,7 @@ slapp.message('goodnight', ['direct_mention', 'direct_message'], (msg) => {
 })
  
 slapp.command('/monitor', /^\s*start\s*$/, (msg) => {
-    msg.say('Started monitoring streams!')
+    msg.say('And so my watch begins... :sunglasses:')
     console.log('getting streams')
     function getStreams() {
         console.log('monitoring...');
@@ -77,7 +77,7 @@ slapp.command('/monitor', /^\s*stop\s*$/, (msg) => {
  
     clearTimeout(monitoringInterval);
     monitoringInterval = null;
-    msg.say('Im no longer monitoring streams :sob:')
+    msg.say('Im no longer monitoring streams :sob: I have no reason to exist :sob:')
 });
  
 slapp.command('/add', /.*/, (msg, text) => {
@@ -94,7 +94,7 @@ slapp.command('/add', /.*/, (msg, text) => {
         msg.respond('Im already watching ' + text + '!');
     } else {
         streamers.push(newStreamer)
-        msg.say('Awesome! Now Im watching ' + text)
+        msg.say('New streamer added! Now Im looking after ' + text + ' :sleuth_or_spy:')
         console.log('added streamer: ' + newStreamer.name);
     }
  
@@ -112,10 +112,10 @@ slapp.command('/delete', /.*/, (msg, text) => {
  
     //If streamer is in array delete, else error.
     if(streamers.findIndex(findStreamer)){
-        msg.say('Im no longer looking after ' + newStreamer + ' :sob:')
+        msg.say('Im no longer looking after ' + newStreamer.name + ' :sob:')
         streamers.splice(streamers.findIndex(findStreamer), 1);
     } else {
-        msg.respond('w00t I couldnt find ' + newStreamer + ' !??')
+        msg.respond('w00t I couldnt find ' + newStreamer.name + ' !??')
     }
  
     console.log(streamers);
