@@ -40,7 +40,21 @@ slapp.command('/monitor', /^\s*start\s*$/, (msg) => {
                     console.log(err);
                 } else if (body.stream) {
                     if (streamers[index].streaming == false) {
-                        msg.say(body.stream.channel.display_name + ' is playing ' + body.stream.game + '.' + ' Stream: ' + body.stream.channel.url);
+                        msg.say({
+                        	attachments: [
+                        		{
+						            fallback: body.stream.channel.display_name + ' is playing ' + body.stream.game + '.' + ' Stream: ' + body.stream.channel.url,
+									pretext: body.stream.channel.url,
+						            color: "#36a64f",
+						            author_name: body.stream.channel.status,
+						            author_link: body.stream.channel.url,
+						            title: "Repomies is streaming!",
+						            title_link: body.stream.channel.url,
+						            text: 'Game: ' + body.stream.game,
+									thumb_url: body.stream.preview.small
+						        }
+                        	]
+                        })
                         streamers[index].streaming = true
                     }
                 } else if (streamers[index].streaming == true ) {
@@ -65,9 +79,7 @@ slapp.command('/monitor', /^\s*stop\s*$/, (msg) => {
     msg.say('Im no longer monitoring streams :sob:')
 });
  
-slapp.message('add /.*/', ['direct_mention', 'direct_message'], (msg, text, channel) => {
-	console.log(text);
-	console.log(channel);
+slapp.command('/add', /.*/, (msg, text) => {
     var streamer = {name: text.trim().toLowerCase(), streaming: false}
     console.log(streamer);
     if(streamers.length > 0) {
