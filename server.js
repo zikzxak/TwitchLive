@@ -36,11 +36,11 @@ slapp.command('/monitor', /^\s*start\s*$/, (msg) => {
 					if (err) {
 						console.log(err);
 					} else if (body.stream) {
-						if (streamers[index].streaming == false) {
+						if (streamers[index].streaming === false) {
 							msg.say(body.stream.channel.display_name + ' is playing ' + body.stream.game + '.' + ' Stream: ' + body.stream.channel.url);
 							streamers[index].streaming = true
 						}
-					} else if (streamers[index].streaming == true ) {
+					} else if (streamers[index].streaming === true ) {
 						streamers[index].streaming = false
 					}
 				});
@@ -48,7 +48,7 @@ slapp.command('/monitor', /^\s*start\s*$/, (msg) => {
 		} else {
 			console.log('no streamers!')
 		}
-		if (monitoring = true) {
+		if (monitoring === true) {
 			setTimeout(getStreams, 30000);
 		} else {
 			return;
@@ -60,6 +60,7 @@ slapp.command('/monitor', /^\s*start\s*$/, (msg) => {
 });
 
 slapp.command('/monitor', /^\s*stop\s*$/, (msg) => {
+
 	monitoring = false;
 });
 
@@ -68,10 +69,10 @@ slapp.command('/add', /.*/, (msg, text) => {
 	console.log(streamer);
 	if(streamers.length > 0) {
 		streamers.forEach(function(name, index) {
-			if (name.name == text.trim().toLowerCase()) {
+			if (name.name === text.trim().toLowerCase()) {
 				msg.say('Im already watching' + text + '!')
 				return;
-			} else if (index == streamers.length - 1) {
+			} else if (index === streamers.length - 1) {
 				streamers.push(streamer)
 				msg.respond('Awesome! Now Im watching ' + text)
 				console.log('added streamer: ' + streamer.name);
@@ -90,11 +91,11 @@ slapp.command('/delete', /.*/, (msg, text) => {
 	console.log(streamer);
 	if(streamers.length > 0) {
 		streamers.forEach(function(name, index) {
-			if (name.name == streamer) {
+			if (name.name === streamer) {
 				msg.say('Sad to see ' + streamer + ' go :(')
 				streamers.splice(index, 1);
 				return;
-			} else if (index == streamers.length - 1) {
+			} else if (index === streamers.length - 1) {
 				msg.say('w00t I couldnt find ' + streamer + ' !??')
 			}
 		});
