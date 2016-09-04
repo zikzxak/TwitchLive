@@ -82,7 +82,7 @@ slapp.command('/monitor', /^\s*stop\s*$/, (msg) => {
  
 slapp.command('/add', /.*/, (msg, text) => {
     var newStreamer = {name: text.trim().toLowerCase(), streaming: false}
-    console.log(streamer);
+    console.log(newStreamer);
  
     //find function to search array
     function findStreamer(streamer) {
@@ -93,7 +93,7 @@ slapp.command('/add', /.*/, (msg, text) => {
     if(streamers.find(findStreamer)){
         msg.respond('Im already watching ' + text + '!');
     } else {
-        streamers.push(streamer)
+        streamers.push(newStreamer)
         msg.say('Awesome! Now Im watching ' + text)
         console.log('added streamer: ' + streamer.name);
     }
