@@ -19,6 +19,10 @@ var streamers = []
 
 var monitoring = false
 
+slapp.message('goodnight', 'mention', (msg) => {
+  msg.say('sweet dreams :crescent_moon: ')
+})
+
 slapp.command('/monitor', /^\s*start\s*$/, (msg) => {
 	monitoring = true;
 	msg.say('Started monitoring streams!')
@@ -27,6 +31,7 @@ slapp.command('/monitor', /^\s*start\s*$/, (msg) => {
 		console.log('monitoring...');
 		if(streamers.length > 0) {
 			streamers.forEach(function(streamer, index) {
+				console.log(streamer.name + ': ' + streamer.streaming);
 				twitch.getChannelStream(streamer.name, function(err, body) {
 					if (err) {
 						console.log(err);
