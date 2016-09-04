@@ -41,6 +41,7 @@ slapp.command('/monitor', /^\s*start\s*$/, (msg) => {
                 } else if (body.stream) {
                     if (streamers[index].streaming == false) {
                         msg.say({
+                        	text: '',
                         	attachments: [
                         		{
 						            fallback: body.stream.channel.display_name + ' is playing ' + body.stream.game + '.' + ' Stream: ' + body.stream.channel.url,
