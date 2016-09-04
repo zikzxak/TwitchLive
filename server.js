@@ -65,7 +65,9 @@ slapp.command('/monitor', /^\s*stop\s*$/, (msg) => {
     msg.say('Im no longer monitoring streams :sob:')
 });
  
-slapp.command('/add', /.*/, (msg, text) => {
+slapp.message('add /.*/', ['direct_mention', 'direct_message'], (msg, text, channel) => {
+	console.log(text);
+	console.log(channel);
     var streamer = {name: text.trim().toLowerCase(), streaming: false}
     console.log(streamer);
     if(streamers.length > 0) {
