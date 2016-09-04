@@ -51,7 +51,7 @@ slapp.command('/monitor', /^\s*start\s*$/, (msg) => {
 						            author_link: body.stream.channel.url,
 						            title: body.stream.channel.display_name + ' is streaming!',
 						            title_link: body.stream.channel.url,
-						            text: 'Game: ' + body.stream.game,
+						            text: body.stream.game,
 									thumb_url: body.stream.preview.small
 						        }
                         	]
