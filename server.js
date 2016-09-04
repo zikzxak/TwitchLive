@@ -95,7 +95,7 @@ slapp.command('/add', /.*/, (msg, text) => {
     } else {
         streamers.push(newStreamer)
         msg.say('Awesome! Now Im watching ' + text)
-        console.log('added streamer: ' + streamer.name);
+        console.log('added streamer: ' + newStreamer.name);
     }
  
     console.log(streamers);
