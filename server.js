@@ -102,21 +102,22 @@ slapp.command('/add', /.*/, (msg, text) => {
 })
  
 slapp.command('/delete', /.*/, (msg, text) => {
-    var streamer = text.trim().toLowerCase()
-    console.log(streamer);
-    if(streamers.length > 0) {
-        streamers.forEach(function(name, index) {
-            if (name.name === streamer) {
-                msg.say('Sad to see ' + streamer + ' go :(')
-                streamers.splice(index, 1);
-                return;
-            } else if (index === streamers.length - 1) {
-                msg.respond('w00t I couldnt find ' + streamer + ' !??')
-            }
-        });
-    } else {
-        msg.respond('w00t I couldnt find ' + streamer + ' !??')
+	var newStreamer = {name: text.trim().toLowerCase(), streaming: false}
+    console.log(newStreamer);
+ 
+    //find function to search array
+    function findStreamer(streamer) {
+        return streamer.name === newStreamer.name;
     }
+ 
+    //If streamer is in array delete, else error.
+    if(streamers.findIndex(findStreamer)){
+        msg.say('Im no longer looking after ' + newStreamer + ' :sob:')
+        streamers.splice(index, 1);
+    } else {
+        msg.respond('w00t I couldnt find ' + newStreamer + ' !??')
+    }
+ 
     console.log(streamers);
 })
  
