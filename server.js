@@ -113,7 +113,7 @@ slapp.command('/delete', /.*/, (msg, text) => {
     //If streamer is in array delete, else error.
     if(streamers.findIndex(findStreamer)){
         msg.say('Im no longer looking after ' + newStreamer + ' :sob:')
-        streamers.splice(index, 1);
+        streamers.splice(streamers.findIndex(findStreamer), 1);
     } else {
         msg.respond('w00t I couldnt find ' + newStreamer + ' !??')
     }
