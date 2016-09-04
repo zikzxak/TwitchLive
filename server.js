@@ -17,7 +17,7 @@ var twitch = new TwitchApi({})
  
 var streamers = []
  
-var monitoringTimeout = null;
+var monitoringInterval = null;
  
 slapp.message('goodnight', ['direct_mention', 'direct_message'], (msg) => {
   msg.say('sweet dreams :crescent_moon: ')
@@ -50,18 +50,18 @@ slapp.command('/monitor', /^\s*start\s*$/, (msg) => {
         });
     }
  
-    monitoringTimeout = setTimeout(getStreams, 30000);
+    monitoringInterval = setInterval(getStreams, 30000);
     getStreams();
 });
  
 slapp.command('/monitor', /^\s*stop\s*$/, (msg) => {
     //no timeout, dont clear
-    if(!monitoringTimeout){
+    if(!monitoringInterval){
         return;
     }
  
-    clearTimeout(monitoringTimeout);
-    monitoringTimeout = null;
+    clearTimeout(monitoringInterval);
+    monitoringInterval = null;
     msg.say('Im no longer monitoring streams :sob:')
 });
  
