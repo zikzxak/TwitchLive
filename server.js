@@ -39,7 +39,7 @@ slapp.command('/monitor', /^\s*start\s*$/, (msg) => {
                 if (err) {
                     console.log(err);
                 } else if (body.stream) {
-                    if (streamers[index].streaming == false) {
+                    if (streamers[index].streaming === false) {
                         msg.say({
                         	text: '',
                         	attachments: [
@@ -58,7 +58,7 @@ slapp.command('/monitor', /^\s*start\s*$/, (msg) => {
                         })
                         streamers[index].streaming = true
                     }
-                } else if (streamers[index].streaming == true ) {
+                } else if (streamers[index].streaming === true ) {
                     streamers[index].streaming = false
                 }
             });
@@ -81,24 +81,23 @@ slapp.command('/monitor', /^\s*stop\s*$/, (msg) => {
 });
  
 slapp.command('/add', /.*/, (msg, text) => {
-    var streamer = {name: text.trim().toLowerCase(), streaming: false}
+    var newStreamer = {name: text.trim().toLowerCase(), streaming: false}
     console.log(streamer);
-    if(streamers.length > 0) {
-        streamers.forEach(function(name, index) {
-            if (name.name == text.trim().toLowerCase()) {
-                msg.say('Im already watching ' + text + '!')
-                break;
-            } else if (index == streamers.length - 1) {
-                streamers.push(streamer)
-                msg.respond('Awesome! Now Im watching ' + text)
-                console.log('added streamer: ' + streamer.name);
-            }
-        });
+ 
+    //find function to search array
+    function findStreamer(streamer) {
+        return streamer.name === newStreamer.name;
+    }
+ 
+    //If streamer is in array, error, else add to array
+    if(streamers.find(findStreamer)){
+        msg.respond('Im already watching ' + text + '!');
     } else {
         streamers.push(streamer)
-        msg.respond('Awesome! Now Im watching ' + text)
+        msg.say('Awesome! Now Im watching ' + text)
         console.log('added streamer: ' + streamer.name);
     }
+ 
     console.log(streamers);
 })
  
@@ -107,16 +106,16 @@ slapp.command('/delete', /.*/, (msg, text) => {
     console.log(streamer);
     if(streamers.length > 0) {
         streamers.forEach(function(name, index) {
-            if (name.name == streamer) {
+            if (name.name === streamer) {
                 msg.say('Sad to see ' + streamer + ' go :(')
                 streamers.splice(index, 1);
                 return;
-            } else if (index == streamers.length - 1) {
-                msg.say('w00t I couldnt find ' + streamer + ' !??')
+            } else if (index === streamers.length - 1) {
+                msg.respond('w00t I couldnt find ' + streamer + ' !??')
             }
         });
     } else {
-        msg.say('w00t I couldnt find ' + streamer + ' !??')
+        msg.respond('w00t I couldnt find ' + streamer + ' !??')
     }
     console.log(streamers);
 })
@@ -128,9 +127,9 @@ slapp.command('/list', (msg) => {
                 if (err) {
                     console.log(err);
                 } else if (body.stream) {
-                    msg.say(body.stream.channel.display_name + ' is playing ' + body.stream.game + '.' + ' Stream: ' + body.stream.channel.url);
+                    msg.respond(body.stream.channel.display_name + ' is playing ' + body.stream.game + '.' + ' Stream: ' + body.stream.channel.url);
                 } else {
-                    msg.say(name.name + ' is offline');
+                    msg.respond(name.name + ' is offline');
                 }
             });
         });
