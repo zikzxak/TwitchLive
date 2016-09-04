@@ -19,7 +19,7 @@ var streamers = []
 
 var monitoring = false
 
-slapp.message('goodnight', 'mention', (msg) => {
+slapp.message('goodnight', ['direct_mention', 'direct_message'], (msg, text) => {
   msg.say('sweet dreams :crescent_moon: ')
 })
 
