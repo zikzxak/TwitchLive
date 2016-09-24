@@ -36,7 +36,7 @@ slapp.message('goodnight', ['direct_mention', 'direct_message'], (msg) => {
 })
  
 slapp.command('/monitor', /^\s*start\s*$/, (msg) => {
-    msg.say('And so my watch begins... :sunglasses:')
+    msg.say('Im watching you... :maki:')
     console.log('getting streams')
     function getStreams() {
         console.log('monitoring...');
