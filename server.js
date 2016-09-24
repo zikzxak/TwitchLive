@@ -23,7 +23,7 @@ var streamers = [
         {name: 'tissukka', streaming: false},
         {name: 'kyklis', streaming: false},
         {name: 'repostmies', streaming: false},
-        {name: 'dunnlimited', streaming: false},
+        {name: 'dunlimited', streaming: false},
         {name: 'hauskis', streaming: false},
         {name: 'teinij', streaming: false},
         {name: 'zergburg', streaming: false}
