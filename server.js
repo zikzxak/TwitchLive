@@ -13,7 +13,11 @@ var slapp = Slapp({
   context: BeepBoopContext()
 })
  
-var twitch = new TwitchApi({})
+var twitch = new TwitchApi({
+    clientId: '4qo5p3oajp806sgom70b74a7ishhypp',
+    clientSecret: '6226c98t6twgkp8eaz8qiy3nubozx7h',
+    redirectUri: 'https://beepboophq.com'
+});
  
 var streamers = []
  
