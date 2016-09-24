@@ -19,7 +19,15 @@ var twitch = new TwitchApi({
     redirectUri: 'https://beepboophq.com'
 });
  
-var streamers = []
+var streamers = [
+        {name: 'tissukka', streaming: false},
+        {name: 'kyklis', streaming: false},
+        {name: 'repostmies', streaming: false},
+        {name: 'dunnlimited', streaming: false},
+        {name: 'hauskis', streaming: false},
+        {name: 'teinij', streaming: false},
+        {name: 'zergburg', streaming: false}
+]
  
 var monitoringInterval = null;
  
